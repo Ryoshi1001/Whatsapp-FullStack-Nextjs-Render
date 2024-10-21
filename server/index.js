@@ -24,8 +24,8 @@ app.use(cors());
 app.use(express.json())
 
 //provides images form uploads pointing route to directory also audio
-// app.use("/uploads/images", express.static("uploads/images"))
-// app.use("/uploads/recordings", express.static("uploads/recordings"))
+app.use("/uploads/images", express.static("uploads/images"))
+app.use("/uploads/recordings", express.static("uploads/recordings"))
 
 //Root route
 app.get('/', (req, res) => {

@@ -90,10 +90,11 @@ export const getMessages = async (req, res, next) => {
 export const addImageMessage = async (req, res, next) => {
   try {
     // Commenting out file handling logic
-    // if (req.file) {
+    if (req.file) { // and this line but leave data.now 
       const date = Date.now(); 
-      // let fileName = "uploads/images/" + date + req.file.originalname; 
-      // renameSync(req.file.path, fileName); // Comment this line out
+      let fileName = "uploads/images/" + date + req.file.originalname; 
+      renameSync(req.file.path, fileName); // Comment this line out for image troubleshooting not saving locally like on vercel 
+    
 
       const prisma = getPrismaInstance();
       const { from, to } = req.query;
@@ -101,7 +102,7 @@ export const addImageMessage = async (req, res, next) => {
       if (from && to) {
         const message = await prisma.messages.create({
           data: {
-            message: `Image upload disabled for troubleshooting at ${date}`, // Placeholder message
+            message: fileName, // Placeholder message
             sender: { connect: { id: parseInt(from) } },
             receiver: { connect: { id: parseInt(to) } },
             type: "image"
@@ -110,7 +111,7 @@ export const addImageMessage = async (req, res, next) => {
         return res.status(201).json({ message });
       }
       return res.status(400).send("From and To are required.");
-    // }
+    }
     return res.status(400).send("Image is required");
   } catch (error) {
     console.error(error);
@@ -123,10 +124,11 @@ export const addImageMessage = async (req, res, next) => {
 export const addAudioMessage = async (req, res, next) => {
   try {
     // Commenting out file handling logic
-    // if (req.file) {
+    if (req.file) {
       const date = Date.now(); 
-      // let fileName = "uploads/recordings/" + date + req.file.originalname; 
-      // renameSync(req.file.path, fileName); // Comment this line out
+      let fileName = "uploads/recordings/" + date + req.file.originalname; 
+      renameSync(req.file.path, fileName); // Comment this line out
+    
 
       const prisma = getPrismaInstance(); 
       const { from, to } = req.query; 
@@ -134,7 +136,7 @@ export const addAudioMessage = async (req, res, next) => {
       if (from && to) {
         const message = await prisma.messages.create({
           data: {
-            message: `Audio upload disabled for troubleshooting at ${date}`, // Placeholder message
+            message: fileName, 
             sender: { connect: { id: parseInt(from) } }, 
             receiver: { connect: { id: parseInt(to) } }, 
             type: "audio"
@@ -143,7 +145,7 @@ export const addAudioMessage = async (req, res, next) => {
         return res.status(201).json({ message });
       }
       return res.status(400).send("From and To are required.");
-    // }
+    }
     return res.status(400).send("Audio is required");
   } catch (error) {
     console.error(error);
