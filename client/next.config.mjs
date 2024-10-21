@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-   domains: ["localhost"],
+   domains: [
+    "https://whatsappbackend-uqtf.onrender.com", 
+    "localhost"],
   }
  };
  
