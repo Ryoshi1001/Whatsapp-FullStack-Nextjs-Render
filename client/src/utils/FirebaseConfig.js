@@ -6,7 +6,7 @@ import { getAuth } from 'firebase/auth'
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: api_Key,
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: "whatsapp-demonstration.firebaseapp.com",
   projectId: "whatsapp-demonstration",
   storageBucket: "whatsapp-demonstration.appspot.com",
