@@ -5,7 +5,7 @@ import { signOut } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react'
 
-const logout = () => {
+const Logout = () => {
   const [{socket, userInfo}, dispatch] = useStateProvider(); 
   const router = useRouter(); 
 
@@ -25,4 +25,4 @@ const logout = () => {
   )
 }
 
-export default logout
+export default Logout
