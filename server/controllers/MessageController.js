@@ -90,7 +90,9 @@ export const getMessages = async (req, res, next) => {
 export const addImageMessage = async (req, res, next) => {
   try {
     // Commenting out file handling logic
-    if (req.file) { // and this line but leave data.now 
+    if (req.file) { // delete this line but leave data.now for Vercel 
+      //debug on render for image/drawing/png texts
+      console.log("Uploading me file details", req.file)
       const date = Date.now(); 
       let fileName = "uploads/images/" + date + req.file.originalname; 
       renameSync(req.file.path, fileName); // Comment this line out for image troubleshooting not saving locally like on vercel 

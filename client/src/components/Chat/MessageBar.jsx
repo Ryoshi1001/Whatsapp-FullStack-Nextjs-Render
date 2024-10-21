@@ -51,6 +51,7 @@ const MessageBar = () => {
           },
           fromSelf: true,
         });
+        console.log("sent drawing text")
       }
     } catch (error) {
       console.log(error);
