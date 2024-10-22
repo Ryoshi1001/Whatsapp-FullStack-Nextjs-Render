@@ -52,7 +52,7 @@ const ChatContainer = () => {
 
   return (
     <>
-      <div className="w-full h-[80vh] relative flex-grow overflow-hidden">
+      <div className="w-full h-[80vh] xs:pb-20 relative flex-grow overflow-hidden">
         {/* Low-opacity background */}
         <div className="absolute inset-0 bg-chat-background opacity-10 z-0"></div>
         

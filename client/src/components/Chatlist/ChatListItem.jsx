@@ -9,23 +9,23 @@ import { setPersistence } from 'firebase/auth';
 
 const ChatListItem = ({ data, isContactsPage = false }) => {
   const [{ userInfo, currentChatUser }, dispatch] = useStateProvider();
-  const [isMobileScreen, setIsMobileScreen] = useState(false); 
+  const [isMobileScreen, setIsMobileScreen] = useState(false);
 
   //resize of avatar for mobile function
   const handleResize = () => {
-    setIsMobileScreen(window.innerWidth < 640); 
-  }; 
+    setIsMobileScreen(window.innerWidth < 640);
+  };
 
   //useEffect to resize avatar for mobile
   useEffect(() => {
-    handleResize(); 
+    handleResize();
 
-    window.addEventListener('resize', handleResize); 
+    window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const handleContactClick = () => {
     if (!isContactsPage) {
@@ -56,12 +56,14 @@ const ChatListItem = ({ data, isContactsPage = false }) => {
       onClick={handleContactClick}
     >
       <div className="xs:px-2 min-w-fit px-5 pt-3 pb-1">
-        <Avatar className="xs:type-[sm]" image={data?.profilePicture}
-        type={isMobileScreen ? "sm" : 'lg'}
+        <Avatar
+          className="xs:type-[sm]"
+          image={data?.profilePicture}
+          type={isMobileScreen ? 'sm' : 'lg'}
         />
       </div>
       <div className="xs:px-2 min-h-full flex flex-col justify-center mt-3 pr-2 w-full text-xs sm:text-sm">
-        <div className="flex justify-between">
+        <div className="flex flex-row xs:flex-col xs:gap-1 justify-between">
           <div>
             <span className="text-white">{data?.name}</span>
           </div>
@@ -80,7 +82,7 @@ const ChatListItem = ({ data, isContactsPage = false }) => {
           )}
         </div>
         <div className="flex border-b border-conversation-border pb-2 pt-1 pr-2">
-          <div className="flex justify-between w-full">
+          <div className="flex flex-row xs:flex-col xs:gap-1 justify-between w-full">
             <span className="text-secondary line-clamp-1 text-sm ">
               {isContactsPage ? (
                 data?.about || '\u00A0'
@@ -107,11 +109,14 @@ const ChatListItem = ({ data, isContactsPage = false }) => {
                 </div>
               )}
             </span>
-            {
-              data.totalUnreadMessages > 0 && (
-                <span className='bg-icon-green px-[5px] text-sm rounded-full'>{data.totalUnreadMessages}</span>
-              )
-            }
+            {data.totalUnreadMessages > 0 && (
+              <div>
+                {' '}
+                <span className="bg-icon-green px-[8px] py-[4px] text-sm rounded-full">
+                  {data.totalUnreadMessages}
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </div>

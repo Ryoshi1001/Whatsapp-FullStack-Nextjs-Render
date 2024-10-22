@@ -35,9 +35,10 @@ module.exports = {
         main: "1fr 2.4fr", 
       }, 
       screens: {
-        "xs": '0px' //custom size for mobile 0px to 640px
+        "xs": {'min': '0px', 'max': '639px'} //custom size for mobile 0px to 640px
       }, 
     },
   },
   plugins: [],
 };
+

@@ -166,13 +166,13 @@ const MessageBar = () => {
   }, [grabPhoto]);
 
   return (
-    <div className="xs:h-16 xs:px-3 xs:pr-3 bg-panel-header-background h-20 px-4 flex items-center justify-center gap-6 relative">
+    <div className="xs:absolute xs:bottom-0 xs:left-0 xs:z-30 xs:w-full  bg-panel-header-background px-4 h-20 flex items-center justify-center relative">
       {
         !showAudioRecorder && (
           <>
-          <div className="xs:flex-col flex items-center justify-center gap-6 xs:gap-3">
+          <div className="xs:flex-col flex gap-3 items-center justify-center">
             <BsEmojiSmile
-              className="text-panel-header-icon cursor-pointer text-xl xs:text-sm"
+              className="text-panel-header-icon cursor-pointer text-2xl xs:text-md"
               title="Emoji"
               id="emoji-modal-window"
               onClick={handleEmojiModal}
@@ -191,30 +191,30 @@ const MessageBar = () => {
               </div>
             )}
             <ImAttachment
-              className="text-panel-header-icon cursor-pointer text-xl xs:text-sm"
+              className="text-panel-header-icon cursor-pointer text-2xl xs:text-md"
               title="Attach File"
               onClick={() => setGrabPhoto(true)}
             />
           </div>
-          <div className="w-full rounded-lg h-10 flex items-center">
+          <div className="w-full rounded-lg h-10 flex items-center mx-3">
             <input
               type="text"
               placeholder="Type a message"
-              className="xs:px-2 bg-input-background text-sm focus:outline-none text-white px-5 h-10 rounded-lg py-4 w-full"
+              className="xs:px-2 xs:h-12 bg-input-background text-sm focus:outline-none text-white px-5 h-10 rounded-lg py-4 w-full"
               onChange={(e) => setMessage(e.target.value)}
               value={message}
             />
           </div>
-          <div className="w-10 items-center justify-center">
+          <div className="w-auto flex items-center justify-center">
             <button onClick={sendMessage}>
               {message.length ? (
                 <MdSend
-                  className="text-panel-header-icon cursor-pointer text-xl"
+                  className="text-panel-header-icon cursor-pointer text-2xl"
                   title="Send Message"
                 />
               ) : (
                 <FaMicrophone
-                  className="text-panel-header-icon cursor-pointer text-xl"
+                  className=" text-panel-header-icon cursor-pointer text-2xl"
                   title="Record"
                   onClick={() => setShowAudioRecorder(true)}
                 />

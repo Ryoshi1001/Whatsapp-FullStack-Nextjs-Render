@@ -13,6 +13,9 @@ function PhotoLibrary({ setImage, hidePhotoLibrary }) {
     '/avatars/7.png',
     '/avatars/8.png',
     '/avatars/9.png',
+    '/avatars/10.png',
+    '/avatars/11.png',
+    '/avatars/12.png',
   ];
 
   return (

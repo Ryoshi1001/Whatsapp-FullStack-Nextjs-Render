@@ -205,7 +205,7 @@ const Main = () => {
         </div>
       )}
       {!videoCall && !voiceCall && (
-        <div className="xs:grid xs:grid-cols-[30%_70%] grid grid-cols-main w-screen h-screen max-h-screen max-w-screen overflow-hidden">
+        <div className="xs:grid xs:grid-cols-[20%_80%] grid grid-cols-main w-screen h-screen max-h-screen max-w-screen overflow-hidden">
           <ChatList />
           {currentChatUser ? (
             <div

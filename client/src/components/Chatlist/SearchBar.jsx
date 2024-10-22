@@ -7,12 +7,12 @@ import { BsFilter } from 'react-icons/bs'
 const SearchBar = () => {
   const [{contactSearch}, dispatch] = useStateProvider()
   return (
-    <div className="xs:px-3 bg-search-input-container-background flex items-center  py-3 pl-5 gap-3 h-14">
-      <div className="bg-panel-header-background flex items-center gap-5 px-3 py-1 rounded-lg flex-grow">
+    <div className="xs:pl-1 xs:pr-1 flex items-center bg-search-input-container-background py-3 pl-5">
+      <div className="xs:gap-1 xs:py-1 xs:px-3 bg-panel-header-background flex justify-center items-center gap-5 px-3 py-3 rounded-lg flex-grow w-full">
         <div>
           <BiSearchAlt2 className="xs:text-sm text-panel-header-icon cursor-pointer text-lg" />
         </div>
-        <div className='w-full'>
+        <div className='w-full h-full'>
           <input
             type="text"
             placeholder="Search or start a new chat"

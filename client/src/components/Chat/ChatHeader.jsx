@@ -60,7 +60,7 @@ const ChatHeader = () => {
   };
 
   return (
-    <div className="h-16 px-4 py-3 text-teal-light flex justify-between items-center bg-panel-header-background">
+    <div className="xs:px-2 h-16 px-4 py-3 text-teal-light flex justify-between items-center bg-panel-header-background">
       <div className="xs:gap-3 xs:pr-3 flex items-center justify-center gap-6">
         <Avatar
           type={'sm'}
@@ -82,15 +82,15 @@ const ChatHeader = () => {
 
       <div className="flex gap-6">
         <MdCall
-          className=" text-panel-header-icon cursor-pointer text-xl"
+          className=" text-panel-header-icon cursor-pointer text-2xl"
           onClick={handleVoiceCall}
         />
         <IoVideocam
-          className="text-panel-header-icon cursor-pointer text-xl"
+          className="text-panel-header-icon cursor-pointer text-2xl"
           onClick={handleVideoCall}
         />
         <BiSearchAlt2
-          className="text-panel-header-icon cursor-pointer text-xl"
+          className="text-panel-header-icon cursor-pointer text-2xl"
           onClick={() =>
             dispatch({
               type: reducerCases.SET_MESSAGE_SEARCH,
@@ -98,7 +98,7 @@ const ChatHeader = () => {
           }
         />
         <BsThreeDotsVertical
-          className="text-panel-header-icon cursor-pointe text-xl cursor-pointer"
+          className="text-panel-header-icon cursor-pointe text-2xl cursor-pointer"
           id="context-opener"
           onClick={(e) => {showContextMenu(e)}}
         />
