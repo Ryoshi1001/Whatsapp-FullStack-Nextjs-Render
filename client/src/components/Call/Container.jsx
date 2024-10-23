@@ -235,3 +235,94 @@ const Container = ({ data }) => {
 };
 
 export default Container;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Save for adding ringtone
+// const [isRingTonePlaying, setIsRingTonePlaying] = useState(false)
+  // const [ringToneAudio, setRingToneAudio] = useState(null)
+  // const playRingtone = () => {
+  //   if (!isRingTonePlaying) {
+  //     const audio = new Audio('/call-sound.mp3')
+  //     audio.play(); 
+  //     setRingToneAudio(audio)
+  //     setIsRingTonePlaying(true)
+  //   } 
+  // }
+ 
+  // const stopRingtone = () => {
+  //   if (isRingTonePlaying && ringToneAudio) {
+  //     ringToneAudio.pause(); 
+  //     ringToneAudio.currentTime = 0; 
+  //     setIsRingTonePlaying(false); 
+  //     setRingToneAudio(null); 
+  //   }
+  // }
+ 
+
+
+
+  //add use Effect to check if call can be accepted
+  // useEffect(() => {
+  //   if (data.type === 'out-going') {
+  //     playRingtone()
+  //     socket.current.on('accept-call', () => {
+  //       setCallAccepted(true); 
+  //       stop ring phone when call accepted
+  //       stopRingtone(); 
+  //     });
+  //     play ringtone for outgoing call
+
+  //   clean event listener
+  //   return () => {
+  //     socket.current.off('accept-call')
+  //   }
+
+  //   } else {
+  //     setTimeout(() => {
+  //       setCallAccepted(true);
+  //     }, 1000);
+  //   }
+  // }, [data]);
+
+
+
+
+
+ // const endCall = () => {
+  //   const id = data.id;
+
+  //   // log out of zegocloud room so camera can stop
+  //   if (zgVar && localStream && publishStream) {
+  //     zgVar.destroyStream(localStream);
+  //     zgVar.stopPublishingStream(publishStream);
+  //     zgVar.logoutRoom(data.roomId.toString());
+  //   }
+
+  //   if (data.callType === 'voice') {
+  //     socket.current.emit('reject-voice-call', {
+  //       from: id,
+  //     });
+  //   } else {
+  //     socket.current.emit('reject-video-call', {
+  //       from: id,
+  //     });
+  //   }
+  //   dispatch({
+  //     type: reducerCases.END_CALL,
+  //   });
+  //   setLocalStream(undefined);
+  // setPublishStream(undefined);
+  // stopRingtone()
+  // };

@@ -13,12 +13,12 @@ const VoiceMessage = dynamic(() => import("./VoiceMessage"), {
 const ChatContainer = () => {
   const [{ messages, currentChatUser, userInfo, socket }, dispatch] =
     useStateProvider();
-    console.log("message in Chat container", messages)
 
     //autoscroll for new messages in ChatContainer
     const chatContainerRef = useRef(null)
 
   console.log('Rendered messages:', messages);
+
   useEffect(() => {
     if (socket.current) {
       const handleNewMessage = (data) => {

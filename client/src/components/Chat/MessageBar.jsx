@@ -166,7 +166,7 @@ const MessageBar = () => {
   }, [grabPhoto]);
 
   return (
-    <div className="xs:absolute xs:bottom-0 xs:left-0 xs:z-30 xs:w-full  bg-panel-header-background px-4 h-20 flex items-center justify-center relative">
+    <div className="xs:absolute xs:bottom-0 xs:left-0 xs:z-20 xs:w-full  bg-panel-header-background px-4 h-20 flex items-center justify-center relative">
       {
         !showAudioRecorder && (
           <>
