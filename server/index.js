@@ -4,11 +4,11 @@ dotenv.config()
 import express from 'express'
 import cors from 'cors'
 import { Server } from 'socket.io'
-
+import axios from 'axios'
 //importing routes
 import AuthRoutes from './routes/AuthRoute.js'
 import MessageRoutes from './routes/MessageRoutes.js'
-import axios from 'axios'
+
 
 const app = express(); 
 
