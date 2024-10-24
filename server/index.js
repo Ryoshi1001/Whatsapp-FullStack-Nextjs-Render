@@ -8,6 +8,7 @@ import { Server } from 'socket.io'
 //importing routes
 import AuthRoutes from './routes/AuthRoute.js'
 import MessageRoutes from './routes/MessageRoutes.js'
+import axios from 'axios'
 
 const app = express(); 
 
@@ -42,6 +43,19 @@ const server = app.listen(PORT, () => {
   console.log(`SERVER RUNNING ON PORT:${PORT}`)
 })
 
+//Render Keep-alive reloader function helps with instance spin-down: 
+const url = "https://whatsappfrontend-balu.onrender.com"; 
+const interval = 30000; 
+const reloadWebsite = () => {
+  axios.get(url)
+  .then(response => {
+    console.log(`Reloaded website at ${new Date().toISOString()} : Status Code ${response.status}`); 
+  })
+  .catch(error => {
+    console.log(`Error reloading website at ${new Date().toISOString()}:`, error.message); 
+  });
+}; 
+
 //if hosting online change origin also for app 
 const io = new Server(server, {
   cors: {
@@ -55,28 +69,6 @@ const io = new Server(server, {
 //maintain online offline of users here
 //each entry is only one time
 global.onlineUsers = new Map()
-
-
-//new connection request: this function runs
-//gets socket, set socket in global.chatsocket
-//.on socket user calls add-user gets userId from front end sets userId and socket.id into global onlineUsers
-// io.on("connection", (socket) => {
-//   global.chatSocket = socket; 
-//   socket.on("add-user", (userId) => {
-//     onlineUsers.set(userId, socket.id); 
-//   })
-//   socket.on("send-msg", (data) => {
-//     const sendUserSocket = onlineUsers.get(data.to); 
-//     if (sendUserSocket) {
-//       socket.to(sendUserSocket).emit("msg-receive", {
-//         from: data.from, 
-//         message: data.message, 
-//       })
-//       console.log("Message forwarded to recipient:", data);
-
-//     }
-//   })
-// })
 
 io.on("connection", (socket) => {
   console.log("New client connected");
@@ -127,8 +119,6 @@ io.on("connection", (socket) => {
     console.error("Socket error:", error);
   });
 
-
-
   socket.on("outgoing-voice-call", (data) => {
     const sendUserSocket = onlineUsers.get(data.to); 
     console.log("outgoingvoicecall", data, sendUserSocket)
@@ -153,15 +143,7 @@ io.on("connection", (socket) => {
     }
   })
 
-  //sockets for end reject call and videos 
-  // socket.on("reject-voice-call", (data) => {
-  //   const sendUserSocket = onlineUsers.get(data.from); 
-  //   if(sendUserSocket) {
-  //     socket.to(sendUserSocket).emit("voice-call-rejected")
-  //   }
-  // })
-
-  //with try catch and errors catch better code 
+  //with try catch and errors better code 
   socket.on("reject-voice-call", (data) => {
     try {
       const sendUserSocket = onlineUsers.get(data.from);
@@ -194,7 +176,6 @@ io.on("connection", (socket) => {
     const sendUserSocket = onlineUsers.get(id); 
     socket.to(sendUserSocket).emit("accept-call")
   })
-
 });
 
 

@@ -35,6 +35,29 @@ const Main = () => {
   const [socketEvent, setSocketEvent] = useState(false);
   //ref for socket io
   const socket = useRef();
+  const [isRingTonePlaying, setIsRingTonePlaying] = useState(false); 
+  const [ringToneAudio, setRingToneAudio] = useState(null); 
+
+ 
+  const playRingtone = () => {
+    if(!isRingTonePlaying) {
+      const audio = new Audio('/call-sound.mp3'); 
+      audio.loop = true; 
+      audio.play(); 
+      setIsRingTonePlaying(true); 
+      setRingToneAudio(audio); 
+    }
+  }; 
+  
+  const stopRingtone = () => {
+    console.log("stopping ringtone from main.jsx")
+    if(isRingTonePlaying && ringToneAudio) {
+      ringToneAudio.pause(); 
+      ringToneAudio.currentTime = 0;
+      setIsRingTonePlaying(false); 
+      setRingToneAudio(null); 
+    }
+  }; 
 
   useEffect(() => {
     if (redirectLogin) {
@@ -125,6 +148,7 @@ const Main = () => {
       });
 
       socket.current.on('incoming-voice-call', ({ from, roomId, callType }) => {
+        playRingtone()
         dispatch({
           type: reducerCases.SET_INCOMING_VOICE_CALL,
           incomingVoiceCall: {
@@ -136,6 +160,7 @@ const Main = () => {
       });
 
       socket.current.on('incoming-video-call', ({ from, roomId, callType }) => {
+        playRingtone()
         dispatch({
           type: reducerCases.SET_INCOMING_VIDEO_CALL,
           incomingVideoCall: {
@@ -144,18 +169,24 @@ const Main = () => {
             callType,
           },
         });
+        
       });
 
       socket.current.on('voice-call-rejected', () => {
+        console.log('call ringtone rejected on sender side')
+        stopRingtone()
         dispatch({
           type: reducerCases.END_CALL,
         });
       });
 
       socket.current.on('video-call-rejected', () => {
+        console.log('videocall ringtone rejected on sender side')
+        stopRingtone()
         dispatch({
           type: reducerCases.END_CALL,
         });
+        
       });
 
       socket.current.on("online-users", ({onlineUsers}) => {
@@ -164,9 +195,17 @@ const Main = () => {
           onlineUsers, 
         })
       })
-
       setSocketEvent(true);
     }
+
+    return () => {
+      socket.current.off('incoming-voice-call');
+      socket.current.off('incoming-video-call');
+      socket.current.off('voice-call-rejected');
+      socket.current.off('video-call-rejected');
+      stopRingtone();
+    };
+
   }, [socket.current, dispatch]);
 
   useEffect(() => {
@@ -192,8 +231,8 @@ const Main = () => {
 
   return (
     <>
-      {incomingVideoCall && (<IncomingVideoCall />)}
-      {incomingVoiceCall && (<IncomingCall />)}
+      {incomingVideoCall && (<IncomingVideoCall stopRingtone={stopRingtone} />)}
+      {incomingVoiceCall && (<IncomingCall stopRingtone={stopRingtone} />)}
       {videoCall && (
         <div className="h-screen w-screen max-h-full overflow-hidden">
           <VideoCall />

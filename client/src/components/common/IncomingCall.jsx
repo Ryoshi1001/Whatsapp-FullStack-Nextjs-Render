@@ -3,10 +3,11 @@ import { useStateProvider } from '@/context/StateContext';
 import Image from 'next/image';
 import React from 'react'
 
-const IncomingCall = () => {
+const IncomingCall = ({ stopRingtone }) => {
   const [{incomingVoiceCall, socket}, dispatch] = useStateProvider(); 
 
   const acceptCall = () => {
+    console.log('incomingVoicecall in incomingVoiceCall Component', incomingVoiceCall)
     dispatch({
       type: reducerCases.SET_VOICE_CALL,
       voiceCall: {
@@ -19,13 +20,16 @@ const IncomingCall = () => {
       type: reducerCases.SET_INCOMING_VOICE_CALL,
       incomingVoiceCall: undefined,
     });
+    stopRingtone(); 
   };
 
   const rejectCall = () => {
+    console.log('incomingCall rejeccted Component')
     socket.current.emit('reject-voice-call', { from: incomingVoiceCall.id });
     dispatch({
       type: reducerCases.END_CALL,
     });
+    stopRingtone()
   };
 
 

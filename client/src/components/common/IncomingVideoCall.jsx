@@ -3,10 +3,11 @@ import { useStateProvider } from '@/context/StateContext';
 import Image from 'next/image';
 import React from 'react';
 
-const IncomingVideoCall = () => {
+const IncomingVideoCall = ({ stopRingtone }) => {
   const [{ incomingVideoCall, socket }, dispatch] = useStateProvider();
 
   const acceptCall = () => {
+    console.log('incomingVideocall in incomingVideoCall Component', incomingVideoCall)
     dispatch({
       type: reducerCases.SET_VIDEO_CALL,
       videoCall: {
@@ -19,6 +20,7 @@ const IncomingVideoCall = () => {
       type: reducerCases.SET_INCOMING_VIDEO_CALL,
       incomingVideoCall: undefined,
     });
+    stopRingtone()
   };
 
   const rejectCall = () => {
@@ -26,7 +28,7 @@ const IncomingVideoCall = () => {
     dispatch({
       type: reducerCases.END_CALL,
     });
-
+    stopRingtone(); 
   };
 
   return (
