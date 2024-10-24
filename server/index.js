@@ -56,6 +56,8 @@ const reloadWebsite = () => {
   });
 }; 
 
+setInterval(reloadWebsite, interval)
+
 //if hosting online change origin also for app 
 const io = new Server(server, {
   cors: {
