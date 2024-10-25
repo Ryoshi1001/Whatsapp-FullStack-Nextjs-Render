@@ -28,13 +28,23 @@ const ChatListItem = ({ data, isContactsPage = false }) => {
   }, []);
 
   const handleContactClick = () => {
+    console.log("Contact data:", data); // Check what data contains
+    console.log("Contact data:", data); // Check what data contains
+    console.log("Profile Picture URL:", data.profilePicture); // Log profile picture URL
+    // Existing dispatch logic...
+      // Validate profile picture URL
+  const profilePictureUrl = data.profilePicture && data.profilePicture.startsWith('http')
+  ? data.profilePicture // Use Cloudinary URL if valid
+  : data.profilePicture.startsWith('/') ? `${data.profilePicture}`
+  :  `/avatars${data.profilePicture}` // Fallback if not valid
+
     if (!isContactsPage) {
       dispatch({
         type: reducerCases.CHANGE_CURRENT_CHAT_USER,
         user: {
           name: data.name,
           about: data.about,
-          profilePicture: data.profilePicture,
+          profilePicture: profilePictureUrl,
           email: data.email,
           id: userInfo.id === data.senderId ? data.receiverId : data.senderId,
         },
@@ -42,7 +52,7 @@ const ChatListItem = ({ data, isContactsPage = false }) => {
     } else {
       dispatch({
         type: reducerCases.CHANGE_CURRENT_CHAT_USER,
-        user: { ...data },
+        user: { ...data, profilePictureUrl },
       });
       dispatch({
         type: reducerCases.SET_ALL_CONTACTS_PAGE,

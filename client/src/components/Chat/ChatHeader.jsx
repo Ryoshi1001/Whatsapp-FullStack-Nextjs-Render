@@ -61,7 +61,7 @@ const ChatHeader = () => {
   };
 
   return (
-    <div className="xs:px-2 h-16 px-4 py-3 text-teal-light flex justify-between items-center bg-panel-header-background">
+    <div className="xs:px-2 xs:h-16 h-16 px-4 py-3 text-teal-light flex justify-between items-center bg-panel-header-background">
       <div className="xs:gap-3 xs:pr-3 flex items-center justify-center gap-6">
         <Avatar
           type={'sm'}

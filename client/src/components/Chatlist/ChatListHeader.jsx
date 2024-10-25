@@ -6,6 +6,8 @@ import axios from 'axios';
 import { reducerCases } from '@/context/constants';
 import { Router, useRouter } from 'next/router';
 import ContextMenu from '../common/ContextMenu';
+import { CiLogout } from "react-icons/ci";
+
 
 const ChatListHeader = () => {
   const [{ userInfo }, dispatch] = useStateProvider();
@@ -53,7 +55,7 @@ const ChatListHeader = () => {
           onClick={handleAllContactsPage}
         />
         <>
-          <BsThreeDotsVertical
+          <CiLogout
             className="text-panel-header-icon cursor-pointer text-2xl w-full h-full"
             title="Menu"
             id="context-opener"

@@ -2,6 +2,7 @@
 const nextConfig = {
   images: {
    domains: [
+    'res.cloudinary.com', 
     "https://whatsappbackend-uqtf.onrender.com", 
     "localhost"],
   }

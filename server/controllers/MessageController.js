@@ -86,35 +86,69 @@ export const getMessages = async (req, res, next) => {
 
 
 //controller for addingImageMessage: for sending images in text chat
-// Controller for adding image messages
-export const addImageMessage = async (req, res, next) => {
-  try {
-    // Commenting out file handling logic
-    if (req.file) { // delete this line but leave data.now for Vercel 
-      //debug on render for image/drawing/png texts
-      console.log("Uploading me file details", req.file)
-      const date = Date.now(); 
-      let fileName = "uploads/images/" + date + req.file.originalname; 
-      renameSync(req.file.path, fileName); // Comment this line out for image troubleshooting not saving locally like on vercel 
+// Controller for adding image messages using Multer: 
+// export const addImageMessage = async (req, res, next) => {
+//   try {
+//     // Commenting out file handling logic
+//     if (req.file) { // delete this line but leave data.now for Vercel 
+//       //debug on render for image/drawing/png texts
+//       console.log("Uploading me file details", req.file)
+//       const date = Date.now(); 
+//       let fileName = "uploads/images/" + date + req.file.originalname; 
+//       renameSync(req.file.path, fileName); // Comment this line out for image troubleshooting not saving locally like on vercel 
     
 
-      const prisma = getPrismaInstance();
-      const { from, to } = req.query;
+//       const prisma = getPrismaInstance();
+//       const { from, to } = req.query;
 
-      if (from && to) {
-        const message = await prisma.messages.create({
-          data: {
-            message: fileName, // Placeholder message
-            sender: { connect: { id: parseInt(from) } },
-            receiver: { connect: { id: parseInt(to) } },
-            type: "image"
-          }
-        });
-        return res.status(201).json({ message });
-      }
-      return res.status(400).send("From and To are required.");
+//       if (from && to) {
+//         const message = await prisma.messages.create({
+//           data: {
+//             message: fileName, // Placeholder message
+//             sender: { connect: { id: parseInt(from) } },
+//             receiver: { connect: { id: parseInt(to) } },
+//             type: "image"
+//           }
+//         });
+//         return res.status(201).json({ message });
+//       }
+//       return res.status(400).send("From and To are required.");
+//     }
+//     return res.status(400).send("Image is required");
+//   } catch (error) {
+//     console.error(error);
+//     next(error);
+//   }
+// };
+
+// Controller for adding image messages using Cloudinary website: 
+export const addImageMessage = async (req, res, next) => {
+  try {
+    // Check if an image is provided in the request body
+    if (!req.body.image) {
+      return res.status(400).send("Image drawing is required");
     }
-    return res.status(400).send("Image is required");
+
+    // Uploading image to Cloudinary
+    const uploadedResponse = await cloudinary.uploader.upload(req.body.image); 
+    const imageUrl = uploadedResponse.secure_url; 
+
+    const prisma = getPrismaInstance();
+    const { from, to } = req.query;
+
+    if (from && to) {
+      const message = await prisma.messages.create({
+        data: {
+          message: imageUrl, 
+          sender: { connect: { id: parseInt(from) } },
+          receiver: { connect: { id: parseInt(to) } },
+          type: "image"
+        }
+      });
+      return res.status(201).json({ message });
+    }
+
+    return res.status(400).send("From and To are required.");
   } catch (error) {
     console.error(error);
     next(error);

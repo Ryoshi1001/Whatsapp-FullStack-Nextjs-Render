@@ -8,6 +8,15 @@ import axios from 'axios'
 //importing routes
 import AuthRoutes from './routes/AuthRoute.js'
 import MessageRoutes from './routes/MessageRoutes.js'
+import { v2 as cloudinary } from "cloudinary"
+
+//configure cloudinary : is v2 from cloudinary but renamed as: cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME, 
+  api_key: process.env.CLOUDINARY_API_KEY, 
+  api_secret: process.env.CLOUDINARY_SECRET
+})
+
 
 const app = express(); 
 

@@ -7,12 +7,13 @@ import MessageStatus from '../common/MessageStatus'
 
 const ImageMessage = ({message}) => {
   const [{currentChatUser, userInfo}] = useStateProvider()
+  console.log("message in drawingmessage", message)
   return (
     <div
     className={`p-1 rounded-lg ${message.senderId === currentChatUser.id ? "bg-incoming-background" : "bg-outgoing-background"}`}
     >
       <div className="relative">
-        <Image src={`${HOST}/${message.message}`}
+        <Image src={message.message}
         className='rounded-lg'
         alt='asset'
         height={300}
