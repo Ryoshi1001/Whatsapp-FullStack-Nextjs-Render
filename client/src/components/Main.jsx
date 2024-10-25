@@ -27,38 +27,15 @@ const Main = () => {
       voiceCall,
       videoCall,
       incomingVideoCall,
-      incomingVoiceCall,
+      incomingVoiceCall, 
     },
     dispatch,
   ] = useStateProvider();
   const [redirectLogin, setRedirectLogin] = useState(false);
   const [socketEvent, setSocketEvent] = useState(false);
   //ref for socket io
-  const socket = useRef();
-  const [isRingTonePlaying, setIsRingTonePlaying] = useState(false); 
-  const [ringToneAudio, setRingToneAudio] = useState(null); 
-
- 
-  const playRingtone = () => {
-    if(!isRingTonePlaying) {
-      const audio = new Audio('/call-sound.mp3'); 
-      audio.loop = true; 
-      audio.play(); 
-      setIsRingTonePlaying(true); 
-      setRingToneAudio(audio); 
-    }
-  }; 
+  const socket = useRef()
   
-  const stopRingtone = () => {
-    console.log("stopping ringtone from main.jsx")
-    if(isRingTonePlaying && ringToneAudio) {
-      ringToneAudio.pause(); 
-      ringToneAudio.currentTime = 0;
-      setIsRingTonePlaying(false); 
-      setRingToneAudio(null); 
-    }
-  }; 
-
   useEffect(() => {
     if (redirectLogin) {
       router.push('/login');
@@ -106,7 +83,6 @@ const Main = () => {
         }
       }
     );
-
     return () => unsubscribe();
   }, [userInfo, dispatch]);
 
@@ -137,6 +113,7 @@ const Main = () => {
   // if (socket.current && !socket.current)
   useEffect(() => {
     if (socket.current && !socketEvent) {
+    
       socket.current.on('msg-receive', (data) => {
         dispatch({
           type: reducerCases.ADD_MESSAGE,
@@ -147,8 +124,8 @@ const Main = () => {
         });
       });
 
-      socket.current.on('incoming-voice-call', ({ from, roomId, callType }) => {
-        playRingtone()
+      socket.current.on('incoming-voice-call', ({ from, roomId, callType }) => {        
+        console.log('incoming-voice-call : socket.on in Main.jsx')
         dispatch({
           type: reducerCases.SET_INCOMING_VOICE_CALL,
           incomingVoiceCall: {
@@ -160,7 +137,7 @@ const Main = () => {
       });
 
       socket.current.on('incoming-video-call', ({ from, roomId, callType }) => {
-        playRingtone()
+        console.log('incoming-video-call : socket.on in Main.jsx')
         dispatch({
           type: reducerCases.SET_INCOMING_VIDEO_CALL,
           incomingVideoCall: {
@@ -173,20 +150,17 @@ const Main = () => {
       });
 
       socket.current.on('voice-call-rejected', () => {
-        console.log('call ringtone rejected on sender side')
-        stopRingtone()
+        console.log('voice-call-rejected : socket.on in Main.jsx')
         dispatch({
           type: reducerCases.END_CALL,
         });
       });
 
       socket.current.on('video-call-rejected', () => {
-        console.log('videocall ringtone rejected on sender side')
-        stopRingtone()
+        console.log('video-call-rejected : socket.on in Main.jsx')
         dispatch({
           type: reducerCases.END_CALL,
         });
-        
       });
 
       socket.current.on("online-users", ({onlineUsers}) => {
@@ -195,17 +169,9 @@ const Main = () => {
           onlineUsers, 
         })
       })
+
       setSocketEvent(true);
     }
-
-    return () => {
-      socket.current.off('incoming-voice-call');
-      socket.current.off('incoming-video-call');
-      socket.current.off('voice-call-rejected');
-      socket.current.off('video-call-rejected');
-      stopRingtone();
-    };
-
   }, [socket.current, dispatch]);
 
   useEffect(() => {
@@ -231,8 +197,8 @@ const Main = () => {
 
   return (
     <>
-      {incomingVideoCall && (<IncomingVideoCall stopRingtone={stopRingtone} />)}
-      {incomingVoiceCall && (<IncomingCall stopRingtone={stopRingtone} />)}
+      {incomingVideoCall && (<IncomingVideoCall />)}
+      {incomingVoiceCall && (<IncomingCall />)}
       {videoCall && (
         <div className="h-screen w-screen max-h-full overflow-hidden">
           <VideoCall />

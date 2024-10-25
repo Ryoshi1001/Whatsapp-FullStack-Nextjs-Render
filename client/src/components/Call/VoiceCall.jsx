@@ -1,7 +1,7 @@
 import { useStateProvider } from '@/context/StateContext'
 import dynamic from 'next/dynamic'
 import React, { useEffect } from 'react'
-const Container = dynamic(() => import("./Container"), {ssr: false})
+import Container from './Container'
 
 const VoiceCall = () => {
   const [{voiceCall, socket, userInfo}] = useStateProvider()
@@ -10,7 +10,7 @@ const VoiceCall = () => {
     if(voiceCall.type === "out-going"){
       socket.current.emit("outgoing-voice-call", {
         to: voiceCall.id, 
-        from: {
+        from: { 
           id: userInfo.id, 
           profilePicture: userInfo.profileImage, 
           name: userInfo.name, 

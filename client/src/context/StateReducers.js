@@ -81,39 +81,39 @@ const reducer = (state, action) => {
         filteredContacts,
       };
     }
-    case reducerCases.SET_VIDEO_CALL:  
+    case reducerCases.SET_VIDEO_CALL:
       return {
-        ...state, 
-        videoCall: action.videoCall, 
-      }
-    case reducerCases.SET_VOICE_CALL:  
+        ...state,
+        videoCall: action.videoCall,
+      };
+    case reducerCases.SET_VOICE_CALL:
       return {
-        ...state, 
-        voiceCall: action.voiceCall, 
-      }
-    case reducerCases.SET_INCOMING_VIDEO_CALL:  
+        ...state,
+        voiceCall: action.voiceCall,
+      };
+    case reducerCases.SET_INCOMING_VIDEO_CALL:
       return {
-        ...state, 
-        incomingVideoCall: action.incomingVideoCall, 
-      }
-    case reducerCases.SET_INCOMING_VOICE_CALL:  
+        ...state,
+        incomingVideoCall: action.incomingVideoCall,
+      };
+    case reducerCases.SET_INCOMING_VOICE_CALL:
       return {
-        ...state, 
-        incomingVoiceCall: action.incomingVoiceCall, 
-      }
-    case reducerCases.END_CALL:  
+        ...state,
+        incomingVoiceCall: action.incomingVoiceCall,
+      };
+    case reducerCases.END_CALL:
       return {
-        ...state, 
-        voiceCall: undefined, 
-        videoCall: undefined, 
-        incomingVideoCall: undefined, 
-        incomingVoiceCall: undefined, 
-      }
-    case reducerCases.SET_EXIT_CHAT: 
-    return {
-      ...state, 
-      currentChatUser: undefined, 
-    } 
+        ...state,
+        voiceCall: undefined,
+        videoCall: undefined,
+        incomingVideoCall: undefined,
+        incomingVoiceCall: undefined,    
+      };
+    case reducerCases.SET_EXIT_CHAT:
+      return {
+        ...state,
+        currentChatUser: undefined,
+      };
     default:
       return state;
   }

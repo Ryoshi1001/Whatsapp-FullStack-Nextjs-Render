@@ -1,13 +1,23 @@
 import { reducerCases } from '@/context/constants';
 import { useStateProvider } from '@/context/StateContext';
 import Image from 'next/image';
-import React from 'react'
+import React, { useEffect } from 'react'
+import reducer from '@/context/StateReducers';
 
-const IncomingCall = ({ stopRingtone }) => {
-  const [{incomingVoiceCall, socket}, dispatch] = useStateProvider(); 
+const IncomingCall = () => {
+  const [{incomingVoiceCall, socket }, dispatch] = useStateProvider(); 
+
 
   const acceptCall = () => {
-    console.log('incomingVoicecall in incomingVoiceCall Component', incomingVoiceCall)
+    console.log('acceptCall function used : from IncomingCall.jsx');
+
+    // stopRingtone(); 
+    // socket.current.emit('stop-ringtone'); 
+    // dispatch({
+    //   type: reducerCases.SET_RINGTONE_PLAYING, 
+    //   isRingtonePlaying: false,  
+    // })
+
     dispatch({
       type: reducerCases.SET_VOICE_CALL,
       voiceCall: {
@@ -15,21 +25,28 @@ const IncomingCall = ({ stopRingtone }) => {
         type: 'in-coming',
       },
     });
+
     socket.current.emit('accept-incoming-call', { id: incomingVoiceCall.id });
     dispatch({
       type: reducerCases.SET_INCOMING_VOICE_CALL,
       incomingVoiceCall: undefined,
     });
-    stopRingtone(); 
   };
 
   const rejectCall = () => {
-    console.log('incomingCall rejeccted Component')
+    console.log('rejectCall function used : from IncomingCall.jsx');
+
+    // stopRingtone(); 
+    // socket.current.emit('stop-ringtone');
+    // dispatch({
+    //   type: reducerCases.SET_RINGTONE_PLAYING, 
+    //   isRingtonePlaying: false, 
+    // })
+    
     socket.current.emit('reject-voice-call', { from: incomingVoiceCall.id });
     dispatch({
       type: reducerCases.END_CALL,
     });
-    stopRingtone()
   };
 
 

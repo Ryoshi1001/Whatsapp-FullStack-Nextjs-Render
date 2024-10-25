@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Avatar from '../common/Avatar';
 import { MdCall } from 'react-icons/md';
 import { IoVideocam } from 'react-icons/io5';
@@ -7,10 +7,11 @@ import { BsThreeDotsVertical } from 'react-icons/bs';
 import { useStateProvider } from '@/context/StateContext';
 import { reducerCases } from '@/context/constants';
 import ContextMenu from '../common/ContextMenu';
+import reducer from '@/context/StateReducers';
 
 const ChatHeader = () => {
-  const [{ currentChatUser, onlineUsers }, dispatch] = useStateProvider();
-
+  const [{ currentChatUser, onlineUsers, socket }, dispatch] =
+    useStateProvider();
   const [contextMenuCoordinates, setContextMenuCoordinates] = useState({
     x: 0,
     y: 0,
@@ -71,11 +72,11 @@ const ChatHeader = () => {
           }
         />
         <div className="flex flex-col">
-          <span className="xs:text-[12px] text-primary-strong">{currentChatUser?.name}</span>
+          <span className="xs:text-[12px] text-primary-strong">
+            {currentChatUser?.name}
+          </span>
           <span className="xs:text-[12px] text-secondary text-sm">
-            {
-              onlineUsers.includes(currentChatUser.id) ? "online" : "offline"
-            }
+            {onlineUsers.includes(currentChatUser.id) ? 'online' : 'offline'}
           </span>
         </div>
       </div>
@@ -100,7 +101,9 @@ const ChatHeader = () => {
         <BsThreeDotsVertical
           className="text-panel-header-icon cursor-pointe text-2xl cursor-pointer"
           id="context-opener"
-          onClick={(e) => {showContextMenu(e)}}
+          onClick={(e) => {
+            showContextMenu(e);
+          }}
         />
         {isContextMenuVisible && (
           <ContextMenu

@@ -9,7 +9,6 @@ import axios from 'axios'
 import AuthRoutes from './routes/AuthRoute.js'
 import MessageRoutes from './routes/MessageRoutes.js'
 
-
 const app = express(); 
 
 app.use(cors());
@@ -49,10 +48,10 @@ const interval = 30000;
 const reloadWebsite = () => {
   axios.get(url)
   .then(response => {
-    console.log(`Reloaded website at ${new Date().toISOString()} : Status Code ${response.status}`); 
+    console.log(`Reloaded website at ${new Date().toUTCString()} : Status Code ${response.status}`); 
   })
   .catch(error => {
-    console.log(`Error reloading website at ${new Date().toISOString()}:`, error.message); 
+    console.log(`Error reloading website at ${new Date().toUTCString()}:`, error.message); 
   });
 }; 
 

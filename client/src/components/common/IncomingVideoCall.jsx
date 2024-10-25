@@ -2,12 +2,12 @@ import { reducerCases } from '@/context/constants';
 import { useStateProvider } from '@/context/StateContext';
 import Image from 'next/image';
 import React from 'react';
+import reducer from '@/context/StateReducers';
 
-const IncomingVideoCall = ({ stopRingtone }) => {
+const IncomingVideoCall = () => {
   const [{ incomingVideoCall, socket }, dispatch] = useStateProvider();
 
   const acceptCall = () => {
-    console.log('incomingVideocall in incomingVideoCall Component', incomingVideoCall)
     dispatch({
       type: reducerCases.SET_VIDEO_CALL,
       videoCall: {
@@ -20,7 +20,7 @@ const IncomingVideoCall = ({ stopRingtone }) => {
       type: reducerCases.SET_INCOMING_VIDEO_CALL,
       incomingVideoCall: undefined,
     });
-    stopRingtone()
+    console.log('acceptCall function used : from incomingVideoCall.jsx');
   };
 
   const rejectCall = () => {
@@ -28,7 +28,8 @@ const IncomingVideoCall = ({ stopRingtone }) => {
     dispatch({
       type: reducerCases.END_CALL,
     });
-    stopRingtone(); 
+    console.log('rejectCall function used : from incomingVideoCall.jsx');
+
   };
 
   return (
