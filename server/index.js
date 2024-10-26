@@ -105,7 +105,12 @@ io.on("connection", (socket) => {
     if (sendUserSocket) {
       socket.to(sendUserSocket).emit("msg-receive", {
         from: data.from,
-        message: data.message,
+        message: {
+          message: data.message, 
+          type: data.type, 
+          senderId: data.from, 
+          createdAt: new Date(), 
+        },
       });
       console.log("Message forwarded to recipient:", data);
     } else {

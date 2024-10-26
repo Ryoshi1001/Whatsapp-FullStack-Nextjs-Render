@@ -44,6 +44,7 @@ const MessageBar = () => {
           to: currentChatUser?.id,
           from: userInfo?.id,
           //send img Url
+          type: 'image', 
           message: imageUrl,
         });
         dispatch({
@@ -51,8 +52,10 @@ const MessageBar = () => {
           newMessage: {
             message: imageUrl, 
             type: "image", 
+            fromSelf: true, 
+            senderId: userInfo.id, 
+            createdAt: new Date(), 
           },
-          fromSelf: true,
         });
         console.log("sent drawing text")
       }
@@ -112,15 +115,19 @@ const MessageBar = () => {
       socket.current.emit('send-msg', {
         to: currentChatUser?.id,
         from: userInfo?.id,
-        message: data.msg,
+        message: message, 
+        type: 'text',
       });
       console.log('Message sent:', data.msg);
 
       dispatch({
         type: reducerCases.ADD_MESSAGE,
         newMessage: {
-          ...data.msg,
+          message:message, 
+          type: 'text', 
+          senderId: userInfo.id,
           fromSelf: true,
+          createdAt: new Date()
         },
       });
       setMessage('');
