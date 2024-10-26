@@ -52,7 +52,7 @@ const ChatContainer = () => {
 
   return (
     <>
-      <div className="w-full h-[80vh] xs:pb-20 relative flex-grow overflow-hidden">
+      <div className="w-full h-full relative flex-grow overflow-hidden">
         {/* Low-opacity background */}
         <div className="absolute inset-0 bg-chat-background opacity-10 z-0"></div>
         
@@ -73,7 +73,7 @@ const ChatContainer = () => {
                 >
                   {message.type === 'text' && (
                     <div
-                      className={`xs:py-2 xs:text-[12px] xs:max-w-[80%] xs:flex-col text-white px-2 py-[10px] text-sm rounded-md flex gap-2 items-end max-w-[45%] 
+                      className={`xs:py-2 xs:text-[14px] xs:max-w-[80%] xs:flex-col text-white px-2 py-[10px] text-[16px] rounded-md flex gap-2 items-end max-w-[45%] 
                   ${
                     message.senderId === currentChatUser.id
                       ? 'bg-incoming-background'
@@ -82,7 +82,7 @@ const ChatContainer = () => {
                     >
                       <span className="break-all">{message.message}</span>
                       <div className="flex gap-1 items-end">
-                        <span className="text-bubble-meta text-[11px] pt-1 min-w-fit">
+                        <span className="text-bubble-meta xs:text-[12] text-[13px] pt-1 min-w-fit">
                           {CalculateTime(message.createdAt)}
                         </span>
                         {message.senderId === userInfo.id && (

@@ -6,8 +6,7 @@ import axios from 'axios';
 import { reducerCases } from '@/context/constants';
 import { Router, useRouter } from 'next/router';
 import ContextMenu from '../common/ContextMenu';
-import { CiLogout } from "react-icons/ci";
-
+import { CiLogout } from 'react-icons/ci';
 
 const ChatListHeader = () => {
   const [{ userInfo }, dispatch] = useStateProvider();
@@ -44,26 +43,30 @@ const ChatListHeader = () => {
   };
 
   return (
-    <div className="xs:px-2 flex flex-row xs:flex-col xs:h-24 xs:gap-3 justify-between items-center h-16 px-4 py-3 overflow-hidden">
+    <div className="xs:px-2 flex flex-row xs:flex-col xs:h-30 xs:gap-3 justify-between items-center h-18 px-4 py-3 overflow-hidden">
       <div className="cursor-pointer">
-        <Avatar type={'sm'} image={userInfo?.profileImage} />
+        <Avatar type={'lg'} image={userInfo?.profileImage} />
       </div>
-      <div className="xs:gap-3 xs:flex xs:justify-between flex gap-6">
-        <BsFillChatLeftTextFill
-          className="text-panel-header-icon cursor-pointer text-xl w-full h-full"
+      <div className="xs:gap-3 xs:flex xs:w-full xs:px-3 xs:justify-between flex gap-6 items-center">
+        <div>
+                  <BsFillChatLeftTextFill
+          className="text-panel-header-icon cursor-pointer text-3xl w-full h-full"
           title="New Chat"
           onClick={handleAllContactsPage}
         />
-        <>
-          <CiLogout
-            className="text-panel-header-icon cursor-pointer text-2xl w-full h-full"
-            title="Menu"
-            id="context-opener"
-            onClick={(e) => {
-              showContextMenu(e);
-            }}
-          />
-        </>
+        </div>
+        <div>
+              <CiLogout
+          className="text-panel-header-icon cursor-pointer text-3xl w-full h-full"
+          title="Menu"
+          id="context-opener"
+          onClick={(e) => {
+            showContextMenu(e);
+          }}
+        />    
+        </div>
+
+
         {isContextMenuVisible && (
           <ContextMenu
             options={contextMenuOptions}

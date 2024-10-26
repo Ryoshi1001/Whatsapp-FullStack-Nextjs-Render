@@ -65,11 +65,11 @@ const ChatListItem = ({ data, isContactsPage = false }) => {
       className={`flex cursor-pointer hover:bg-background-default-hover xs:flex xs:flex-col xs:items-start`}
       onClick={handleContactClick}
     >
-      <div className="xs:px-2 min-w-fit px-5 pt-3 pb-1">
+      <div className="xs:px-2 min-w-fit px-5 pt-3 pb-1 \">
         <Avatar
-          className="xs:type-[sm]"
+          className="xs:type-[lg]"
           image={data?.profilePicture}
-          type={isMobileScreen ? 'sm' : 'lg'}
+          type={isMobileScreen ? 'lg' : 'lg'}
         />
       </div>
       <div className="xs:px-2 min-h-full flex flex-col justify-center mt-3 pr-2 w-full text-xs sm:text-sm">
@@ -91,7 +91,7 @@ const ChatListItem = ({ data, isContactsPage = false }) => {
             </div>
           )}
         </div>
-        <div className="flex border-b border-conversation-border pb-2 pt-1 pr-2">
+        <div className="flex border-b border-conversation-border pb-3 pt-1 pr-2">
           <div className="flex flex-row xs:flex-col xs:gap-1 justify-between w-full">
             <span className="text-secondary line-clamp-1 text-sm ">
               {isContactsPage ? (

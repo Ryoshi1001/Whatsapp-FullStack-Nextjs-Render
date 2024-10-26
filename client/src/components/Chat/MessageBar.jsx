@@ -176,11 +176,11 @@ const MessageBar = () => {
   }, [grabPhoto]);
 
   return (
-    <div className="xs:absolute xs:bottom-0 xs:left-0 xs:right-0 xs:z-20 xs:w-full  bg-panel-header-background px-4 h-20 flex items-center justify-center relative">
+    <div className="xs:absolute xs:py-4 xs:bottom-0 xs:left-0 xs:right-0 xs:z-20 xs:w-full  bg-panel-header-background px-4 py-6 h-auto flex items-center justify-center relative">
       {
         !showAudioRecorder && (
           <>
-          <div className="xs:flex-col flex gap-3 items-center justify-center">
+          <div className="xs:flex-col px-1 flex gap-3 items-center justify-center">
             <BsEmojiSmile
               className="text-panel-header-icon cursor-pointer text-2xl xs:text-md"
               title="Emoji"
@@ -213,10 +213,18 @@ const MessageBar = () => {
               className="xs:px-2 xs:h-12 bg-input-background text-sm focus:outline-none text-white px-5 h-10 rounded-lg py-4 w-full"
               onChange={(e) => setMessage(e.target.value)}
               value={message}
+              onKeyDown={(e) => {
+                if (e.key === "Enter"){
+                  e.preventDefault(); 
+                  sendMessage(); 
+                }
+              }}
             />
           </div>
-          <div className="w-auto flex items-center justify-center">
-            <button onClick={sendMessage}>
+          <div className="px-2 w-auto flex items-center justify-center">
+            <button 
+            onClick={sendMessage}
+            >
               {message.length ? (
                 <MdSend
                   className="text-panel-header-icon cursor-pointer text-2xl"

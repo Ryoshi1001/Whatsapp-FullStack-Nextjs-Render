@@ -49,7 +49,7 @@ const ContactsList = () => {
 
   return (
     <div className="h-full flex flex-col">
-      <div className="h-16 flex px-3 py-4">
+      <div className="h-20 flex px-3 py-8 border-r-[1px] border-x-conversation-border">
         <div className="flex flex-row justify-between items-center text-white w-full">
           <BiArrowBack
             className="cursor-pointer text-xl"
@@ -59,12 +59,12 @@ const ContactsList = () => {
               })
             }
           />
-          <span className='text-[12px]' >New Chat</span>
+          <span className='text-[13px]' >New Chat</span>
         </div>
       </div>
 
       <div
-        className="bg-search-input-container-background h-full flex flex-col overflow-auto custom-scrollbar"
+        className="bg-search-input-container-background h-full flex flex-col overflow-auto custom-scrollbar py-3"
       >
         <div className="flex py-3 items-center gap-3 h-14">
           <div className="xs:gap-1 bg-panel-header-background flex items-center gap-5 px-3 py-1 rounded-lg flex-grow mx-4">
@@ -75,7 +75,7 @@ const ContactsList = () => {
               <input
                 type="text"
                 placeholder="Search contacts"
-                className="xs:text-[8px] bg-transparent text-sm focus:outline-none text-white w-full align-middle"
+                className="xs:text-[8px] bg-transparent text-sm focus:outline-none text-white w-full align-middle py-3"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />

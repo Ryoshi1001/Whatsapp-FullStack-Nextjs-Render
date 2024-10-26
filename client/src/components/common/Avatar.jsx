@@ -79,7 +79,7 @@ function Avatar({ type, image, setImage }) {
               src={image}
               priority={true}
               alt="avatar drawing"
-              className="rounded-full"
+              className="rounded-full bg-conversation-panel-background"
               sizes='40px' //10*4 for retina displays
               fill
             />
@@ -92,7 +92,7 @@ function Avatar({ type, image, setImage }) {
               src={image}
               priority={true}
               alt="avatar drawing"
-              className="rounded-full"
+              className="rounded-full bg-conversation-panel-background"
               sizes='56px' //10*4 for retina displays
               fill
             />
@@ -137,7 +137,7 @@ function Avatar({ type, image, setImage }) {
                 src={image}
                 alt="avatar drawing"
                 priority={true}
-                className="rounded-full"
+                className="rounded-full bg-conversation-panel-background"
                 sizes='240px' //10*4 for retina displays
                 fill
                 

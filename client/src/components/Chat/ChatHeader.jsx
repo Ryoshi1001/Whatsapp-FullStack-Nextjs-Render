@@ -61,10 +61,10 @@ const ChatHeader = () => {
   };
 
   return (
-    <div className="xs:px-2 xs:h-16 h-16 px-4 py-3 text-teal-light flex justify-between items-center bg-panel-header-background">
+    <div className="xs:px-2 xs:h-23 h-20 px-4 py-3 text-teal-light flex justify-between items-center bg-panel-header-background">
       <div className="xs:gap-3 xs:pr-3 flex items-center justify-center gap-6">
         <Avatar
-          type={'sm'}
+          type={'lg'}
           image={
             currentChatUser
               ? currentChatUser.profilePicture
@@ -72,26 +72,26 @@ const ChatHeader = () => {
           }
         />
         <div className="flex flex-col">
-          <span className="xs:text-[12px] text-primary-strong">
+          <span className="xs:text-[16px] text-primary-strong">
             {currentChatUser?.name}
           </span>
-          <span className="xs:text-[12px] text-secondary text-sm">
+          <span className="xs:text-[13px] text-secondary text-sm">
             {onlineUsers.includes(currentChatUser.id) ? 'online' : 'offline'}
           </span>
         </div>
       </div>
 
-      <div className="flex gap-6">
+      <div className="flex gap-6 xs:pr-3">
         <MdCall
-          className=" text-panel-header-icon cursor-pointer text-2xl"
+          className=" text-panel-header-icon cursor-pointer text-3xl"
           onClick={handleVoiceCall}
         />
         <IoVideocam
-          className="text-panel-header-icon cursor-pointer text-2xl"
+          className="text-panel-header-icon cursor-pointer text-3xl"
           onClick={handleVideoCall}
         />
         <BiSearchAlt2
-          className="text-panel-header-icon cursor-pointer text-2xl"
+          className="text-panel-header-icon cursor-pointer text-3xl"
           onClick={() =>
             dispatch({
               type: reducerCases.SET_MESSAGE_SEARCH,
@@ -99,7 +99,7 @@ const ChatHeader = () => {
           }
         />
         <BsThreeDotsVertical
-          className="text-panel-header-icon cursor-pointe text-2xl cursor-pointer"
+          className="text-panel-header-icon cursor-pointe text-3xl cursor-pointer"
           id="context-opener"
           onClick={(e) => {
             showContextMenu(e);
