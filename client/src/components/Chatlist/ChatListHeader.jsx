@@ -47,17 +47,17 @@ const ChatListHeader = () => {
       <div className="cursor-pointer">
         <Avatar type={'lg'} image={userInfo?.profileImage} />
       </div>
-      <div className="xs:gap-3 xs:flex xs:w-full xs:px-3 xs:justify-between flex gap-6 items-center">
+      <div className="xs:gap-3 xs:flex xs:w-full xs:justify-between flex gap-6 items-center">
         <div>
                   <BsFillChatLeftTextFill
-          className="text-panel-header-icon cursor-pointer text-3xl w-full h-full"
+          className=" text-panel-header-icon cursor-pointer text-3xl w-full h-full"
           title="New Chat"
           onClick={handleAllContactsPage}
         />
         </div>
         <div>
               <CiLogout
-          className="text-panel-header-icon cursor-pointer text-3xl w-full h-full"
+          className="xs:text-4xl text-panel-header-icon cursor-pointer text-3xl w-full h-full"
           title="Menu"
           id="context-opener"
           onClick={(e) => {

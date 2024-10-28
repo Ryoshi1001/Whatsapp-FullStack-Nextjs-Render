@@ -20,7 +20,7 @@ const Empty = () => {
   }, [])
   return (
     <>
-    <div className='w-full  border-l border-conversation-border bg-panel-header-background flex flex-col h-[100vh] border-b-4 border-b-icon-green items-center justify-center'>
+    <div className='w-full border-l border-conversation-border bg-panel-header-background flex flex-col h-[100vh] border-b-4 border-b-icon-green items-center justify-center'>
       <Image src={"/whatsapp.gif"} alt='whatsapp drawing' width={isMobileScreen ? 180 : 300} height={isMobileScreen ? 180 : 300} priority={true} unoptimized/>
     </div>
     <SearchBar/>

@@ -52,7 +52,7 @@ const ChatContainer = () => {
 
   return (
     <>
-      <div className="w-full h-full relative flex-grow overflow-hidden">
+      <div className="w-full xs:pb-24 h-full relative flex-grow overflow-hidden">
         {/* Low-opacity background */}
         <div className="absolute inset-0 bg-chat-background opacity-10 z-0"></div>
         
@@ -61,7 +61,7 @@ const ChatContainer = () => {
         ref={chatContainerRef}
         >
           <div className="flex w-full">
-            <div className="xs:mx-4 xs:my-1 flex flex-col justify-end w-full gap-1 overflow-auto mx-10 my-6 relative left-0 bottom-0">
+            <div className="xs:mx-4 xs:mb-2 xs:mt-0 flex flex-col justify-end w-full gap-2 overflow-auto mx-10 my-4 relative left-0 bottom-0">
               {messages.map((message, index) => (
                 <div
                   key={index}
@@ -82,7 +82,7 @@ const ChatContainer = () => {
                     >
                       <span className="break-all">{message.message}</span>
                       <div className="flex gap-1 items-end">
-                        <span className="text-bubble-meta xs:text-[12] text-[13px] pt-1 min-w-fit">
+                        <span className="text-bubble-meta text-[12px] pt-1 min-w-fit">
                           {CalculateTime(message.createdAt)}
                         </span>
                         {message.senderId === userInfo.id && (

@@ -61,7 +61,7 @@ const ChatHeader = () => {
   };
 
   return (
-    <div className="xs:px-2 xs:h-23 h-20 px-4 py-3 text-teal-light flex justify-between items-center bg-panel-header-background">
+    <div className="xs:px-2 xs:h-[80px] h-20 px-4 py-3 text-teal-light flex justify-between items-center bg-panel-header-background">
       <div className="xs:gap-3 xs:pr-3 flex items-center justify-center gap-6">
         <Avatar
           type={'lg'}
@@ -72,7 +72,7 @@ const ChatHeader = () => {
           }
         />
         <div className="flex flex-col">
-          <span className="xs:text-[16px] text-primary-strong">
+          <span className="xs:text-[12px] text-primary-strong">
             {currentChatUser?.name}
           </span>
           <span className="xs:text-[13px] text-secondary text-sm">
@@ -81,13 +81,13 @@ const ChatHeader = () => {
         </div>
       </div>
 
-      <div className="flex gap-6 xs:pr-3">
+      <div className="flex flex-row justify-center items-center h-full  xs:gap-4 gap-6 xs:pr-3">
         <MdCall
-          className=" text-panel-header-icon cursor-pointer text-3xl"
+          className="text-panel-header-icon cursor-pointer text-3xl"
           onClick={handleVoiceCall}
         />
         <IoVideocam
-          className="text-panel-header-icon cursor-pointer text-3xl"
+          className=" text-panel-header-icon cursor-pointer text-3xl"
           onClick={handleVideoCall}
         />
         <BiSearchAlt2
