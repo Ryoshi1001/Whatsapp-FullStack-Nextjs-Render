@@ -1,29 +1,34 @@
 import getPrismaInstance from '../utils/PrismaClient.js';
 import { generateToken04 } from '../utils/TokenGenerator.js';
 
-//checkuser controller for login on login page
+// Check user controller for login on login page
 export const checkUser = async (req, res, next) => {
   try {
     const { email } = req.body;
-    if (!email) {
-      res.json({ msg: 'Email is required', status: false });
-    }
-    const prisma = getPrismaInstance();
-    console.log("Prisma Instance: ", prisma ? "Created" : "Failed to Create"); 
-    console.log('Searching for user with email', email)
-    const user = await prisma.user.findUnique({ where: { email } });
-    console.log("User Found: ", user ? "Yes" : "No"); 
 
+    // Check if email is provided
+    if (!email) {
+      return res.status(400).json({ msg: 'Email is required', status: false }); // Use return to exit the function
+    }
+
+    const prisma = getPrismaInstance();
+    console.log("Prisma Instance: ", prisma ? "Created" : "Failed to Create");
+    console.log('Searching for user with email:', email);
+
+    // Find user by email
+    const user = await prisma.user.findUnique({ where: { email } });
+    console.log("User Found: ", user ? "Yes" : "No");
+
+    // Check if user exists
     if (!user) {
-      console.log("User Not Found For Email", email)
+      console.log("User Not Found For Email:", email);
       return res.json({ msg: 'User not found', status: false });
     } else {
       return res.json({ msg: 'User found', status: true, data: user });
     }
   } catch (error) {
-    next(error);
-    console.error('Error in CheckUser authController: ', error.message);
-    return res.status(500).json({ msg: 'Internal Server Error', error: error.message, status: false})
+    console.error('Error in CheckUser authController:', error.message);
+    return res.status(500).json({ msg: 'Internal Server Error', error: error.message, status: false });
   }
 };
 
