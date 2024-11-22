@@ -9,16 +9,21 @@ export const checkUser = async (req, res, next) => {
       res.json({ msg: 'Email is required', status: false });
     }
     const prisma = getPrismaInstance();
+    console.log("Prisma Instance: ", prisma ? "Created" : "Failed to Create"); 
+    console.log('Searching for user with email', email)
     const user = await prisma.user.findUnique({ where: { email } });
+    console.log("User Found: ", user ? "Yes" : "No"); 
 
     if (!user) {
+      console.log("User Not Found For Email", email)
       return res.json({ msg: 'User not found', status: false });
     } else {
       return res.json({ msg: 'User found', status: true, data: user });
     }
   } catch (error) {
     next(error);
-    console.log(error.message);
+    console.error('Error in CheckUser authController: ', error.message);
+    return res.status(500).json({ msg: 'Internal Server Error', error: error.message, status: false})
   }
 };
 
