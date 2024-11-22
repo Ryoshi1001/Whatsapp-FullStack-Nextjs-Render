@@ -54,6 +54,7 @@ const Login = () => {
   
       // Sending the email to the backend to check if user exists
       console.log('Sending email to backend for user check:', email);
+      console.log('Checking user at:', CHECK_USER_ROUTE);
       const { data } = await axios.post(CHECK_USER_ROUTE, { email });
       
       console.log('Received response from backend:', { data });
