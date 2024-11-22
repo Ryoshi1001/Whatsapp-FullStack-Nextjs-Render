@@ -9,7 +9,7 @@ import axios from 'axios'
 import AuthRoutes from './routes/AuthRoute.js'
 import MessageRoutes from './routes/MessageRoutes.js'
 import { v2 as cloudinary } from "cloudinary"
-import { PrismaClient } from '@prisma/client'
+// import { PrismaClient } from '@prisma/client'
 
 //configure cloudinary : is v2 from cloudinary but renamed as: cloudinary
 cloudinary.config({
@@ -18,18 +18,19 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_SECRET
 })
 
-const prisma = new PrismaClient()
+//used for debugging checking NeonDB connection Locally
+// const prisma = new PrismaClient()
 
-async function testConnection() {
-  try {
-    await prisma.$connect()
-    console.log("Database connection successful")
-  } catch (error) {
-    console.error("Database connection failed:", error)
-    process.exit(1)
-  }
-}
-await testConnection()
+// async function testConnection() {
+//   try {
+//     await prisma.$connect()
+//     console.log("Database connection successful")
+//   } catch (error) {
+//     console.error("Database connection failed:", error)
+//     process.exit(1)
+//   }
+// }
+// await testConnection()
 
 
 const app = express(); 
