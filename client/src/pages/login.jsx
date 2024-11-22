@@ -41,21 +41,29 @@ const Login = () => {
   }, [userInfo, newUser])
   
   const handleLogin = async () => {
+    console.log('Starting login process...');
     try {
       const provider = new GoogleAuthProvider();
+      console.log('Attempting to sign in with Google...');
+      
       const {
         user: { displayName: name, email, photoURL: profileImage },
       } = await signInWithPopup(firebaseAuth, provider);
-
+      
+      console.log('User signed in successfully:', { name, email, profileImage });
+  
+      // Sending the email to the backend to check if user exists
+      console.log('Sending email to backend for user check:', email);
       const { data } = await axios.post(CHECK_USER_ROUTE, { email });
-      console.log({ data });
-
-
+      
+      console.log('Received response from backend:', { data });
+  
       if (!data.status) {
+        console.log('New user detected. Redirecting to onboarding...');
         dispatch({
-          type:reducerCases.SET_NEW_USER, 
-          newUser: true, 
-        }); 
+          type: reducerCases.SET_NEW_USER,
+          newUser: true,
+        });
         dispatch({
           type: reducerCases.SET_USER_INFO,
           userInfo: {
@@ -67,24 +75,24 @@ const Login = () => {
         });
         router.push('/onboarding');
       } else {
-        const {id, name, email, profilePicture:profileImage, status } = data.data; 
+        console.log('Existing user found. Updating user info...');
+        const { id, name, email, profilePicture: profileImage, status } = data.data;
         dispatch({
           type: reducerCases.SET_USER_INFO,
           userInfo: {
-            id, 
+            id,
             name,
-            email, 
-            profileImage, 
+            email,
+            profileImage,
             status
           },
         });
-        router.push('/')
+        router.push('/');
       }
     } catch (error) {
       console.error('Login error:', error.message);
     }
   };
-
   return (
     <div className="flex justify-center items-center bg-panel-header-background h-screen w-screen flex-col gap-6 overflow-clip">
       <div className="flex justify-center items-center text-white gap-2 ">
