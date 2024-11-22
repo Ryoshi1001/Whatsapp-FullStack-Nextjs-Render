@@ -34,9 +34,16 @@ cloudinary.config({
 
 const app = express(); 
 
+const allowedOrigins = [
+  "https://whatsappfrontend-balu.onrender.com", 
+  "http://localhost:3000"
+]
+
 // Configure CORS
 const corsOptions = {
-  origin: 'https://whatsappfrontend-balu.onrender.com', // Replace with your frontend URL
+  origin: ['https://whatsappfrontend-balu.onrender.com',
+    "http://localhost:3000"
+  ], // Replace with your frontend URL
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true, // Allow credentials (cookies, authorization headers, etc.)
 };
