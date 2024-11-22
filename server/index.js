@@ -32,10 +32,20 @@ cloudinary.config({
 // }
 // await testConnection()
 
-
 const app = express(); 
 
-app.use(cors());
+// Configure CORS
+const corsOptions = {
+  origin: 'https://whatsappfrontend-balu.onrender.com', // Replace with your frontend URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // Enable preflight across all routes
+
+
+
 
 // app.use(cors({
 //   origin: 'http://localhost:3000', // or whatever your client's URL is

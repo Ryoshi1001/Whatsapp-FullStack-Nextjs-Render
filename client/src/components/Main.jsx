@@ -47,7 +47,9 @@ const Main = () => {
       firebaseAuth,
       async (currentUser) => {
         if (!currentUser) {
+          console.log('No user logged in, redirecting to login...');
           setRedirectLogin(true);
+          return; 
         }
 
         if (!userInfo && currentUser?.email) {
