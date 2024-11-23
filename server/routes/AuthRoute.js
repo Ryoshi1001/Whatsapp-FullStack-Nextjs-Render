@@ -1,5 +1,6 @@
 import express from 'express'
 import { checkUser, generateToken, getAllUsers, onBoardUser } from '../controllers/AuthController.js';
+import getPrismaInstance from '../utils/PrismaClient.js';
 
 const router = express.Router(); 
 
